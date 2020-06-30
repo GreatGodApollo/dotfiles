@@ -1,0 +1,151 @@
+#!/bin/bash
+##DESC## This script allows you to create, edit and remove custom scripts.
+USAGE="USAGE: cs [-re] <file>"
+
+SCRIPTS_DIR=~/.bin
+
+open_file() {
+    if [ -z "$1" ]; then
+        return
+    fi
+
+    "${EDITOR:-nano}" "$1"
+}
+
+if [ "$1" != "" ]
+then
+
+    if [ "$(echo $1 | grep "/" )" != "" ]; then
+
+        echo "
+        Slashes are not enabled in the filename
+        I will try to fix this eventually
+        "
+
+        exit 1
+
+    fi
+
+    DID_OPTS=false
+
+    while getopts ":r::e:" opt; do
+
+        DID_OPTS=true
+
+        case $opt in
+
+            r)
+
+                if [ -f "$SCRIPTS_DIR/$OPTARG" ]; then
+
+                    rm "$SCRIPTS_DIR/$OPTARG"
+                    echo
+                    echo "Script '$OPTARG' removed!"
+                    echo
+
+                else
+
+                    echo
+                    echo "There is no script named '$OPTARG'!"
+                    echo
+                    exit 1
+
+                fi
+
+                ;;
+
+            e)
+
+                if [ -f "$SCRIPTS_DIR/$OPTARG" ]; then
+
+                    # vi "$SCRIPTS_DIR/$OPTARG"
+                    open_file "$SCRIPTS_DIR/$OPTARG"
+                    chmod u+x "$SCRIPTS_DIR/$OPTARG"
+
+                else
+
+                    echo
+                    echo "There is no script named '$OPTARG'!"
+                    echo
+                    exit 1
+
+                fi
+
+                ;;
+
+            :)
+
+                echo
+                echo "Parmater -$OPTARG requires a file argument. use the 'scripts' command to see the list of scripts"
+                echo
+                echo $USAGE
+                echo
+                ;;
+
+            \?)
+
+                echo "Unknown paramter: '-$OPTARG'"
+                echo
+                echo $USAGE
+                exit 1
+                ;;
+
+        esac
+
+    done
+
+    if [ $DID_OPTS = false ]
+    then
+
+        if [ -f "$SCRIPTS_DIR/$1" ]; then
+
+            echo
+            echo "There's already a script with that name! Either choose a new name"
+            echo "for your script or use 'cs -e $1' to edit the pre-existing script."
+            echo
+            exit 1
+
+        fi
+
+        if [ -f "$1" ]; then
+
+            echo
+            echo "File already exists, changing to a script and moving..."
+            echo
+
+        else
+
+            touch "$1"
+            echo "#!/bin/bash" > "$1"
+            sleep 0.1
+
+            if [ -f "$1" ]; then
+
+                echo
+                echo "Changing to a script and moving..."
+                echo
+
+            else
+
+                echo
+                echo "Doing nothing, since you didn't save the file"
+                echo
+                exit 1
+
+            fi
+
+        fi
+
+        chmod u+x "$1"
+        mv "$1" "$SCRIPTS_DIR/$1"
+        open_file "$SCRIPTS_DIR/$1"
+
+    fi
+
+else
+
+    echo
+    echo $USAGE
+    echo
+
+fi
