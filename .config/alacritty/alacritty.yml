@@ -1,0 +1,70 @@
+window:
+  padding:
+    x: 2
+    y: 2
+  title: terminal
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 10000
+
+font:
+  normal:
+    family: Iosevka Nerd Font Mono
+    style: Semibold
+  bold:
+    family: Iosevka Nerd Font Mono
+    style: Bold
+  italic:
+    family: Iosevka Nerd Font Mono
+    style: Italic
+  bold_italic:
+    family: Iosevka Nerd Font Mono
+    style: Bold Italic
+
+  size: 9
+
+colors:
+  primary:
+    background: '0x161925'
+    foreground: '0xC3C7D1'
+  cursor:
+    text: '0x2E3440'
+    cursor: '0xD8DEE9'
+  normal:
+    black: '0x282C34'
+    red: '0xED254E'
+    green: '0x71F79F'
+    yellow: '0xF9DC5C'
+    blue: '0x7CB7FF'
+    magenta: '0xC74DED'
+    cyan: '0x00C1E4'
+    white: '0xDCDFE4'
+  bright:
+    black: '0x282C34'
+    red: '0xED254E'
+    green: '0x71F79F'
+    yellow: '0xF9DC5C'
+    blue: '0x7CB7FF'
+    magenta: '0xC74DED'
+    cyan: '0x00C1E4'
+    white: '0xDCDFE4'
+  
+background_opacity: 0.9
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  save_to_clipboard: true
+
+cursor:
+  style: Underline
+
+mouse:
+  url:
+    launcher:
+      program: xdg-open
+      args: []
