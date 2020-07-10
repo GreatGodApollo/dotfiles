@@ -132,23 +132,6 @@ set number
 
 set relativenumber
 
-
-
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "",
-    \ "Staged"    : "+",
-    \ "Untracked" : "ﮖ",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "",
-    \ "Dirty"     : "",
-    \ "Clean"     : "",
-    \ 'Ignored'   : '#',
-    \ "Unknown"   : ""
-    \ }
-
-
-
 " Functions
 
 function! IsNERDTreeOpen()

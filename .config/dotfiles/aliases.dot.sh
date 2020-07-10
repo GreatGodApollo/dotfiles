@@ -33,3 +33,6 @@ eval $(thefuck --alias)
 # Make QSR & Lunar use ~/.config
 alias lunar='lunar --config ~/.config/lunar.yaml'
 alias qsr='qsr --config ~/.config/qsr.json'
+
+# Make gotestsum a lot shorter
+alias gots='gotestsum'
